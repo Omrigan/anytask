@@ -9,8 +9,3 @@ services:
     restart: always
     volumes:
       - ../../anytask-data:/app/data
-
-networks:
-  default:
-    external:
-        name: $NETWORK
