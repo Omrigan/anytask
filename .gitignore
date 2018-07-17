@@ -60,4 +60,5 @@ target/
 anytask/settings_local.py
 .env
 .eggs
+.idea
 sqlite3.db

@@ -9,6 +9,7 @@ RUN apt-get update && \
         python-dev \
         python-pip \
         nginx \
+        gettext \
         supervisor \
         && \
         pip2 install  pip setuptools && \
@@ -29,6 +30,7 @@ COPY docker/supervisor-app.conf /etc/supervisor/conf.d/
 COPY . /app
 RUN python /app/anytask/manage.py collectstatic --noinput
 RUN python /app/setup.py install
+RUN python /app/anytask/manage.py compilemessages
 
 
 EXPOSE 80

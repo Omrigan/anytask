@@ -2,10 +2,31 @@ version: '3'
 services:
   web:
     image: anytask
+    container_name: anytask
+    env_file: .env
     environment:
       - DJANGO_SETTINGS_MODULE=anytask.settings_docker
+      - "VIRTUAL_HOST=anytask.goto.msk.ru"
+      - "LETSENCRYPT_HOST=anytask.goto.msk.ru"
+      - HSTS=max-age=31536000; includeSubDomains; preload
     restart: always
-    ports:
-      - 80:80
     volumes:
       - ./data:/app/data
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+#      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+
+#  db:
+#    image: postgres:alpine
+#    volumes:
+#      - ../../postgres_data:/var/lib/postgresql/data/
+networks:
+  default:
+    external:
+        name: $NETWORK

@@ -1,3 +1,5 @@
+psycopg2
+mysql
 tornado<4.6
 ipykernel==4.5.2
 django==1.5.12
